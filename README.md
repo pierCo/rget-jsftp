@@ -1,3 +1,3 @@
-rget-sftp
+rget-jsftp
 =========
 TODO
