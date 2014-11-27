@@ -1,7 +1,7 @@
 {
     "name": "jsftp-getter",
     "version": "0.0.0",
-    "description": "A node JS librairy for download from FTP file or directory.",
+    "description": "A node.js FTP downloader librairy for get file or directory.",
     "keywords": ["ftp", "recursive download"],
     "author": "Pierre Cosson <pierre.cosson@gmail.com>",
     "license": "MIT",
