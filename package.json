@@ -1,23 +1,35 @@
 {
-    "name": "jsftp-getter",
-    "version": "0.0.0",
-    "description": "A node.js FTP downloader librairy for get file or directory.",
-    "keywords": ["ftp", "recursive download"],
-    "author": "Pierre Cosson <pierre.cosson@gmail.com>",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/peyo/rget-jsftp.git"
-    },
-    "bugs": {
-        "url": "https://github.com/peyo/rget-jsftp/issues"
-    },
-    "dependencies": {
-        "jsftp": "1.3.8",
-        "generic-pool": "2.1.1"
-    },
-    "main": "./rget-jsftp.js",
-    "engines": {
-        "node": ">= 0.10"
-    }
+  "name": "rget-jsftp",
+  "version": "0.0.0",
+  "description": "A node API to download a file or folder (containing files or sub folders) located on a FTP.",
+  "keywords": [
+    "ftp",
+    "recursive download"
+  ],
+  "author": "Pierre Cosson <pierre.cosson@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peyo/rget-jsftp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/peyo/rget-jsftp/issues"
+  },
+  "dependencies": {
+    "jsftp": "1.3.8",
+    "generic-pool": "2.1.1"
+  },
+  "devDependencies": {
+    "mocha": "2.0.1",
+    "istanbul": "0.3.2",
+    "mocha-istanbul": "0.2.0",
+    "sinon": "1.12.1",
+    "ftp-test-server": "0.0.1",
+    "rimraf": "2.2.*",
+    "crc": "3.2.*"
+  },
+  "main": "./lib/rget-jsftp.js",
+  "engines": {
+    "node": ">= 0.10"
+  }
 }
