@@ -4,7 +4,9 @@
   "description": "A node API to download a file or folder (containing files or sub folders) located on a FTP.",
   "keywords": [
     "ftp",
-    "recursive download"
+    "folder",
+    "files",
+    "browse"
   ],
   "author": "Pierre Cosson <pierre.cosson@gmail.com>",
   "license": "MIT",
@@ -21,14 +23,16 @@
   },
   "devDependencies": {
     "mocha": "2.0.1",
-    "istanbul": "0.3.2",
-    "mocha-istanbul": "0.2.0",
+    "istanbul": "0.3.*",
     "sinon": "1.12.1",
     "ftp-test-server": "0.0.1",
     "rimraf": "2.2.*",
     "crc": "3.2.*"
   },
   "main": "./lib/rget-jsftp.js",
+  "scripts": {
+    "test": "make test"
+  },
   "engines": {
     "node": ">= 0.10"
   }
