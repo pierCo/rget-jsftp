@@ -58,6 +58,75 @@ var ctx = rgetClient.generateDownloadContext('from', 'to');
 | from       | The FTP path where "rget" will read data. |
 | to | The path in your filesystem, relative or absolute, where "rget" will write data. |
 
+With the context you can get 'files' and 'folders' concern by download.
+
+
+Context functions :
+
+```javascript
+// All files
+var filesArray = ctx.files;
+
+// All folders
+var foldersArray = ctx.folders;
+
+//
+var size = ctx.getTotalSize();
+
+//
+var size = ctx.getDownloadedSize();
+
+//
+var filesArray = ctx.getNotDownloadedFiles();
+
+//
+var filesArray = ctx.getDownloadedFiles();
+
+//
+var foldersArray = ctx.getNotExploredFolders();
+
+//
+var foldersArray = ctx.getExploredFolders();
+
+//
+var filePath = ctx.getFileSource(myFile);
+
+// (on the file system)
+var filePath = ctx.getFileDestination(myFile);
+
+//
+var folderPath = ctx.getFolderSource(myFolder);
+
+// (on the file system)
+var folderPath = ctx.getFolderDestination(myFolder);
+```
+
+__File__
+Object structure :
+
+```javascript
+function () {
+    "use strict";
+    this.name = '';
+    this.relativePath = '';
+    this.size = 0;
+    this.complete = 0;
+};
+```
+
+__Folder__
+Object structure :
+
+```javascript
+var FolderToDownload = function () {
+    "use strict";
+    this.name = '';
+    this.relativePath = '';
+    this.explored = false;
+};
+```
+
+
 ## Step 4 - Bind context events (if you want)
 Context object extends "EventEmitter". So you can bind the event with callback function.
 
@@ -66,28 +135,83 @@ ctx.on('evName', callback);
 ```
 
 ### Context event
-- initialized
-- finished
+- initialized : emit when all folders are explored
+__Callback function is :__
 
-callback is :
 ```javascript
 function() {
     ...
 }
 ```
-No parameter.
+- finished : emit when all files are downloaded
+__Callback function is :__
+
+```javascript
+function() {
+    ...
+}
+```
 
 ### File or folder event
-- folderAdded
-- folderExplored
-- fileAdded
-- downloadStart
-- dataReceived
-- downloadFinished
-### Error event
-- error
-- errorWithFile
+- fileAdded : emit when file is added to the context download list
+__Callback function is :__
 
+```javascript
+function(folder) {
+    ...
+}
+```
+- folderExplored : emit when folder is added to the context explore list
+__Callback function is :__
+
+```javascript
+function(folder) {
+    ...
+}
+```
+- downloadStart : emit when file download starting
+__Callback function is :__
+
+```javascript
+function(file) {
+    ...
+}
+```
+- dataReceived : emit when data is received (see "stepDataEvent" parameter)
+__Callback function is :__
+
+```javascript
+function(file) {
+    ...
+}
+```
+- downloadFinished : emit when file is downloaded
+__Callback function is :__
+
+```javascript
+function(file) {
+    ...
+}
+```
+
+### Error event
+- error : on error in process
+__Callback function is :__
+
+```javascript
+function(err) {
+    ...
+}
+```
+
+- errorWithFile : on error with file
+__Callback function is :__
+
+```javascript
+function(err, file) {
+    ...
+}
+```
 
 ## Step 5 - Start download
 ```javascript
