@@ -6,6 +6,8 @@ var rimraf = require('rimraf');
 var fs = require('fs');
 var crc = require('crc');
 
+"use strict";
+
 describe('reget', function () {
 
     var ftpServer, rgetClient;
@@ -13,7 +15,6 @@ describe('reget', function () {
     var downloadDestination = path.join(process.cwd(), 'test', 'dest');
 
     before(function (done) {
-        "use strict";
         ftpServer = new ftpServerTest();
         ftpServer.init({
             host: '127.0.0.1',
@@ -28,7 +29,6 @@ describe('reget', function () {
     });
 
     beforeEach(function (done) {
-        "use strict";
         rgetClient = rget.RGet({
             host: 'localhost',
             username: 'user',
@@ -41,7 +41,6 @@ describe('reget', function () {
     });
 
     after(function (done) {
-        "use strict";
         if (typeof ftpServer !== 'undefined') {
             ftpServer.stop();
         }
@@ -49,7 +48,6 @@ describe('reget', function () {
     });
 
     afterEach(function (done) {
-        "use strict";
         rgetClient.destroy();
         rimraf(downloadDestination, function () {
             done();
@@ -79,7 +77,6 @@ describe('reget', function () {
         }, null);
         var ctx = rgetObj.generateDownloadContext('', '');
         ctx.on('error', function (err) {
-            "use strict";
             if (err.code === 'ENOTFOUND') {
                 next();
             } else {
@@ -93,7 +90,6 @@ describe('reget', function () {
         var srcNotExist = 'not_exist';
         var ctx = rgetClient.generateDownloadContext(srcNotExist, downloadDestination);
         ctx.on('error', function (err) {
-            "use strict";
             if (err.code === 550) {
                 next();
             } else {
@@ -101,57 +97,47 @@ describe('reget', function () {
             }
         });
         ctx.on('initialized', function () {
-            "use strict";
             if (ctx.files.length > 1 || ctx.folders.length > 0 || ctx.source !== srcNotExist || ctx.destination !== downloadDestination) {
                 assert.fail();
             }
         });
         ctx.on('finished', function () {
-            "use strict";
             assert.fail();
         });
         rgetClient.download(ctx);
     });
 
     function testDownloadOneFile(next) {
-        "use strict";
         var fileSource = '/test/server/1/my_file.txt';
         var ctx = rgetClient.generateDownloadContext(fileSource, downloadDestination);
         ctx.on('error', function (err) {
-            "use strict";
             assert.fail(err);
         });
         ctx.on('errorWithFile', function (err) {
-            "use strict";
             assert.fail(err);
         });
         ctx.on('initialized', function (file) {
-            "use strict";
             if (ctx.files.length != 1 || ctx.folders.length > 0 || ctx.source !== fileSource || ctx.destination !== downloadDestination) {
                 assert.fail();
             }
         });
         ctx.on('fileAdded', function (file) {
-            "use strict";
             if (file.name !== path.basename(fileSource)) {
                 assert.fail();
             }
         });
         ctx.on('downloadStart', function (file) {
-            "use strict";
             if (file.name !== path.basename(fileSource)) {
                 assert.fail();
             }
         });
         ctx.on('downloadFinished', function (file) {
-            "use strict";
             if (file.name !== path.basename(fileSource)) {
                 assert.fail();
             }
             assertFailIfDownloadedFileIsNotTheSameThatTheSource(this, file);
         });
         ctx.on('finished', function () {
-            "use strict";
             next();
         });
         rgetClient.download(ctx);
@@ -160,11 +146,9 @@ describe('reget', function () {
     it('Download one file', testDownloadOneFile);
 
     function copyFileAndRunTest(source, destination, callback) {
-        "use strict";
         var readable = fs.createReadStream(source);
         readable.pipe(fs.createWriteStream(destination));
         readable.on('end', function () {
-            "use strict";
             callback();
         });
     }
@@ -173,7 +157,6 @@ describe('reget', function () {
         var fileSource = path.join(process.cwd(), '/test/server/1/my_file.txt');
         var fileDestination = path.join(downloadDestination, 'my_file.txt');
         copyFileAndRunTest(fileSource, fileDestination, function () {
-            "use strict";
             testDownloadOneFile(next);
         });
     });
@@ -183,7 +166,6 @@ describe('reget', function () {
         var fileDestination = path.join(downloadDestination, 'my_file.txt');
         var readable = fs.createReadStream(fileSource);
         copyFileAndRunTest(fileSource, fileDestination, function () {
-            "use strict";
             testDownloadOneFile(next);
         });
     });
@@ -192,32 +174,27 @@ describe('reget', function () {
         var fileSource = '/test/server/2';
         var ctx = rgetClient.generateDownloadContext(fileSource, downloadDestination);
         ctx.on('error', function (err) {
-            "use strict";
+
             assert.fail(err);
         });
         ctx.on('errorWithFile', function (err) {
-            "use strict";
             assert.fail(err);
         });
         ctx.on('initialized', function (file) {
-            "use strict";
             if (ctx.files.length != 4 || ctx.folders.length != 3) {
                 assert.fail();
             }
         });
         ctx.on('downloadFinished', function (file) {
-            "use strict";
             assertFailIfDownloadedFileIsNotTheSameThatTheSource(this, file);
         });
         ctx.on('finished', function () {
-            "use strict";
             next();
         });
         rgetClient.download(ctx);
     });
 
     function assertFailIfDownloadedFileIsNotTheSameThatTheSource(ctx, file) {
-        "use strict";
         var to = ctx.getFileDestination(file);
         var from = path.join(process.cwd(), ctx.getFileSource(file));
         var crc32To = crc.crc32(fs.readFileSync(to)).toString(16);
