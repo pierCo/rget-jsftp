@@ -201,7 +201,7 @@ describe('reget', function () {
         });
         ctx.on('initialized', function (file) {
             "use strict";
-            if (ctx.files.length != 4 || ctx.folders.length != 4) {
+            if (ctx.files.length != 4 || ctx.folders.length != 3) {
                 assert.fail();
             }
         });
