@@ -102,6 +102,7 @@ var folderPath = ctx.getFolderDestination(myFolder);
 ```
 
 __File__
+
 Object structure :
 
 ```javascript
@@ -115,6 +116,7 @@ function () {
 ```
 
 __Folder__
+
 Object structure :
 
 ```javascript
