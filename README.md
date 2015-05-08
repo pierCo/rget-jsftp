@@ -52,13 +52,25 @@ All possible parameters are :
 ## Step 3 - Create the download context
 ```javascript
 var ctx = rgetClient.generateDownloadContext('from', 'to');
-```
-| Parameter name      | Description      |
-| ------------------- | ---------------- |
-| from       | The FTP path where "rget" will read data. |
-| to | The path in your filesystem, relative or absolute, where "rget" will write data. |
+// OR
+var ctx = rgetClient.generateDownloadContext('from', function(relativeFtpPath, type, object){
+    return 'to';
+});
 
-With the context you can get 'files' and 'folders' concern by download.
+```
+| Parameter name      |  Type    | Description      |
+| ------------------- | -------- | ---------------- |
+| from    |  String   | The FTP path where "rget" will read data. |
+| to | String or Function | The filesystem path, relative or absolute, where "rget" will write data or the function generate this path for data. |
+
+The function 'to' can take 3 parameters :
+- relativeFtpPath : the data ftp path
+- type : 'file'|'folder'
+- object : file or folder object
+This function musts return a string represent the data normalized filesystem path.
+
+
+With the context you can get 'files' and 'folders' concerned by the download.
 
 
 Context functions :

@@ -24,6 +24,7 @@
   "devDependencies": {
     "mocha": "2.0.1",
     "istanbul": "0.3.*",
+    "mocha-istanbul": "0.2.*",
     "sinon": "1.12.1",
     "ftp-test-server": "0.0.1",
     "rimraf": "2.2.*",
