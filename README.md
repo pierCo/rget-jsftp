@@ -227,6 +227,15 @@ function(err, file) {
 }
 ```
 
+- timeoutWithFile : on connection timeout during file download
+__Callback function is :__
+
+```javascript
+function(file) {
+    ...
+}
+```
+
 ## Step 5 - Start download
 ```javascript
 rgetClient.download(ctx);
