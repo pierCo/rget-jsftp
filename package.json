@@ -1,6 +1,6 @@
 {
   "name": "rget-jsftp",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A node API to download a file or entire folder located on a FTP.",
   "keywords": [
     "ftp",
