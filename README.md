@@ -51,6 +51,7 @@ All possible parameters are :
 | port                | The FTP connection port. _The default value is 21._ |
 | username            | The user name for the protected FTP connection. _If the value is empty the FTP connection will be anonymous._ |
 | password            | The user password for the protected FTP connection. |
+| debug               | debug mode. _The default value is false_ |
 
 ## Step 3 - Create the download context
 ```javascript
