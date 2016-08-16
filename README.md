@@ -5,6 +5,8 @@ This nodeJS module uses :
 - [jsftp](https://github.com/sergi/jsftp "Go to GitHub") to connect and to request the FTP server
 - [node-pool](https://github.com/coopernurse/node-pool "Go to GitHub") to manage the FTP connections
 
+**The only change from the original RGET-JSFTP module in the option to inject the DEBUG mode into the jsftp module**
+
 How do you use it
 =========
 ## Step 1 - Import module
@@ -34,7 +36,8 @@ All possible parameters are :
     'host': '',
     'port': 21,
     'username': '',
-    'password': ''
+    'password': '',
+    'debug': false
 }
 ```
 | Parameter name      | Description      |
@@ -48,6 +51,7 @@ All possible parameters are :
 | port                | The FTP connection port. _The default value is 21._ |
 | username            | The user name for the protected FTP connection. _If the value is empty the FTP connection will be anonymous._ |
 | password            | The user password for the protected FTP connection. |
+| debug               | debug mode. _The default value is false_ |
 
 ## Step 3 - Create the download context
 ```javascript
