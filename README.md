@@ -4,7 +4,7 @@ A client FTP module to download files or folders with a connection pool for mana
 This nodeJS module uses :
 - [jsftp](https://github.com/sergi/jsftp "Go to GitHub") to connect and to request the FTP server
 - [node-pool](https://github.com/coopernurse/node-pool "Go to GitHub") to manage the FTP connections
-
+** The only change from the original RGET-JSFTP module in the option to inject the DEBUG mode into the jsftp module **
 How do you use it
 =========
 ## Step 1 - Import module
@@ -34,7 +34,8 @@ All possible parameters are :
     'host': '',
     'port': 21,
     'username': '',
-    'password': ''
+    'password': '',
+    'debug': false
 }
 ```
 | Parameter name      | Description      |
